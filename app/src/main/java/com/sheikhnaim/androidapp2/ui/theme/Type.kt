@@ -1,4 +1,4 @@
-package com.raywenderlich.androidapp2.ui.theme
+package com.sheikhnaim.androidapp2.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle

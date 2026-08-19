@@ -1,4 +1,4 @@
-package com.raywenderlich.androidapp2.ui.screens
+package com.sheikhnaim.androidapp2.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -15,8 +15,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.raywenderlich.androidapp2.ui.theme.CoffeeBrown
-import com.raywenderlich.androidapp2.ui.theme.SparkleYellow
+import com.sheikhnaim.androidapp2.ui.theme.CoffeeBrown
+import com.sheikhnaim.androidapp2.ui.theme.SparkleYellow
 
 /**
  * Celebratory completion screen shown when all team members complete their orders.

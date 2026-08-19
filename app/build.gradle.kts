@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.raywenderlich.androidapp2"
+    namespace = "com.sheikhnaim.androidapp2"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.raywenderlich.androidapp2"
+        applicationId = "com.sheikhnaim.androidapp2"
         minSdk = 26
         targetSdk = 34
         versionCode = 1

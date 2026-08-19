@@ -1,4 +1,4 @@
-package com.raywenderlich.androidapp2.ui.screens
+package com.sheikhnaim.androidapp2.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -21,12 +21,12 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.raywenderlich.androidapp2.data.CoffeeOrderItem
-import com.raywenderlich.androidapp2.data.OrderViewModel
-import com.raywenderlich.androidapp2.ui.components.HeaderView
-import com.raywenderlich.androidapp2.ui.components.RatingView
-import com.raywenderlich.androidapp2.ui.components.TimerView
-import com.raywenderlich.androidapp2.ui.theme.*
+import com.sheikhnaim.androidapp2.data.CoffeeOrderItem
+import com.sheikhnaim.androidapp2.data.OrderViewModel
+import com.sheikhnaim.androidapp2.ui.components.HeaderView
+import com.sheikhnaim.androidapp2.ui.components.RatingView
+import com.sheikhnaim.androidapp2.ui.components.TimerView
+import com.sheikhnaim.androidapp2.ui.theme.*
 import kotlin.math.roundToInt
 
 /**

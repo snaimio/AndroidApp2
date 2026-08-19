@@ -1,4 +1,4 @@
-package com.raywenderlich.androidapp2.ui.components
+package com.sheikhnaim.androidapp2.ui.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -13,8 +13,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.raywenderlich.androidapp2.ui.theme.CoffeeBrown
-import com.raywenderlich.androidapp2.ui.theme.CoffeeBrownLight
+import com.sheikhnaim.androidapp2.ui.theme.CoffeeBrown
+import com.sheikhnaim.androidapp2.ui.theme.CoffeeBrownLight
 
 /**
  * Top navigation header displaying the screen title and clickable page circles.

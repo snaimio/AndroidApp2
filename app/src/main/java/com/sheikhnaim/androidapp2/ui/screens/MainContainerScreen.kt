@@ -1,4 +1,4 @@
-package com.raywenderlich.androidapp2.ui.screens
+package com.sheikhnaim.androidapp2.ui.screens
 
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.pager.HorizontalPager
@@ -11,7 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.window.Dialog
 import androidx.compose.ui.window.DialogProperties
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.raywenderlich.androidapp2.data.OrderViewModel
+import com.sheikhnaim.androidapp2.data.OrderViewModel
 import kotlinx.coroutines.launch
 
 /**

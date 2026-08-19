@@ -1,4 +1,4 @@
-package com.raywenderlich.androidapp2.ui.screens
+package com.sheikhnaim.androidapp2.ui.screens
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
@@ -15,8 +15,8 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.raywenderlich.androidapp2.ui.components.HeaderView
-import com.raywenderlich.androidapp2.ui.theme.CoffeeBrown
+import com.sheikhnaim.androidapp2.ui.components.HeaderView
+import com.sheikhnaim.androidapp2.ui.theme.CoffeeBrown
 
 /**
  * Welcome screen presenting app brand, start button, and quick access to Order History.

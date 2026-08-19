@@ -1,10 +1,10 @@
-package com.raywenderlich.androidapp2.ui.components
+package com.sheikhnaim.androidapp2.ui.components
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.raywenderlich.androidapp2.ui.theme.CoffeeBrown
+import com.sheikhnaim.androidapp2.ui.theme.CoffeeBrown
 import kotlinx.coroutines.delay
 
 /**

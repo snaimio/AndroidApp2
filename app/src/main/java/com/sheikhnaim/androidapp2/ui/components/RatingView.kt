@@ -1,4 +1,4 @@
-package com.raywenderlich.androidapp2.ui.components
+package com.sheikhnaim.androidapp2.ui.components
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -11,7 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
-import com.raywenderlich.androidapp2.ui.theme.CoffeeBrown
+import com.sheikhnaim.androidapp2.ui.theme.CoffeeBrown
 
 /**
  * 5-cup interactive rating bar matching iOS RatingView.
