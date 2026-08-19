@@ -1,6 +1,6 @@
 package com.sheikhnaim.androidapp2.ui.screens
 
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -33,7 +33,9 @@ fun MainContainerScreen(
 
     HorizontalPager(
         state = pagerState,
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier
+            .fillMaxSize()
+            .systemBarsPadding()
     ) { page ->
         if (page == 0) {
             // Tab 0: Welcome Screen
