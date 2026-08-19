@@ -92,8 +92,7 @@ fun SuccessScreen(
             Spacer(modifier = Modifier.height(10.dp))
 
             Text(
-                text = "Great job team!
-Coffee run successful. ☕️",
+                text = "Great job team!\nCoffee run successful. ☕️",
                 fontSize = 16.sp,
                 color = Color.Gray,
                 textAlign = TextAlign.Center
