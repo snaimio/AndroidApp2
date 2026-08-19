@@ -17,13 +17,21 @@ import com.sheikhnaim.androidapp2.ui.theme.CoffeeBrown
 import com.sheikhnaim.androidapp2.ui.theme.CoffeeBrownLight
 
 /**
- * Top navigation header displaying the screen title and clickable page circles.
+ * ============================================================================
+ * COMPOSABLE: HeaderView
+ * ============================================================================
+ * Equivalent to SwiftUI's `HeaderView`.
  *
- * @param titleText Title text to show.
- * @param currentPage Current page index in the horizontal pager (0 = Welcome, 1..4 = Members).
- * @param showPageNumbers If true, renders numbered circle buttons for each team member.
- * @param teamMembers List of team member names.
- * @param onPageSelected Callback triggered when a user taps a member circle.
+ * Displays:
+ *  1. Title at the top (e.g. "Alex's Order" or "Welcome").
+ *  2. Clickable numbered circle buttons (1, 2, 3, 4) with member names below.
+ *     Tapping any circle directly animates the HorizontalPager to that member's page.
+ *
+ * @param titleText Main screen title displayed in Coffee Brown.
+ * @param currentPage The active page index in the HorizontalPager (0 = Welcome, 1..4 = Members).
+ * @param showPageNumbers If true, shows member circle buttons (false for Welcome screen).
+ * @param teamMembers List of team members for labeling the circles.
+ * @param onPageSelected Callback invoked when a user taps a member circle.
  */
 @Composable
 fun HeaderView(
@@ -40,7 +48,7 @@ fun HeaderView(
             .padding(vertical = 10.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        // Main title in Coffee Brown
+        // Title Text
         Text(
             text = if (showPageNumbers) titleText else "Welcome",
             fontSize = 20.sp,
@@ -56,13 +64,14 @@ fun HeaderView(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 teamMembers.forEachIndexed { index, name ->
-                    val pageIndex = index + 1 // +1 because 0 is Welcome
+                    val pageIndex = index + 1 // +1 offset because index 0 is Welcome screen
                     val isSelected = currentPage == pageIndex
 
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         modifier = Modifier.clickable { onPageSelected(pageIndex) }
                     ) {
+                        // Circle button with number
                         Box(
                             modifier = Modifier
                                 .size(40.dp)
@@ -77,6 +86,7 @@ fun HeaderView(
                                 color = if (isSelected) CoffeeBrown else Color.Gray
                             )
                         }
+                        // Team member name below circle
                         Text(
                             text = name,
                             fontSize = 11.sp,

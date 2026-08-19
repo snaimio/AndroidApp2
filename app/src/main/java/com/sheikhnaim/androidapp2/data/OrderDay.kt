@@ -3,12 +3,18 @@ package com.sheikhnaim.androidapp2.data
 import java.util.UUID
 
 /**
- * Groups orders by date for sectioned display in the Order History view.
+ * ============================================================================
+ * DATA MODEL: OrderDay
+ * ============================================================================
+ * Equivalent to SwiftUI's `OrderDay: Identifiable`.
  *
- * @property id Unique identifier for each day group.
- * @property dateFormatted Formatted date string (e.g., "Monday, May 28").
- * @property yearMonthDay Key used to compare if two orders belong to the same calendar day.
- * @property orders List of orders placed on this day.
+ * Used to group individual coffee orders by calendar day so the History view
+ * can display clean daily sections (e.g., "Monday, May 28").
+ *
+ * @property id Unique UUID string for lazy list stability.
+ * @property dateFormatted Human-readable header date (e.g., "Monday, Aug 19").
+ * @property yearMonthDay Normalized string ("yyyy MM dd") used to check if two orders were placed on the same calendar day.
+ * @property orders The list of coffee orders placed on this specific date.
  */
 data class OrderDay(
     val id: String = UUID.randomUUID().toString(),

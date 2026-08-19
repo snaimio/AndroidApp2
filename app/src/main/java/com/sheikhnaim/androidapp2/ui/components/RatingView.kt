@@ -14,10 +14,18 @@ import androidx.compose.ui.unit.dp
 import com.sheikhnaim.androidapp2.ui.theme.CoffeeBrown
 
 /**
- * 5-cup interactive rating bar matching iOS RatingView.
+ * ============================================================================
+ * COMPOSABLE: RatingView
+ * ============================================================================
+ * Equivalent to SwiftUI's `RatingView`.
  *
- * @param rating Current rating (1 to 5, or 0 if unrated).
- * @param onRatingChange Callback invoked when a cup icon is tapped.
+ * Renders 5 interactive coffee cup icons:
+ *  - Cups <= current rating are filled in CoffeeBrown.
+ *  - Cups > current rating are outlined in Gray.
+ *  - Tapping cup #N updates the rating state to N via State Hoisting.
+ *
+ * @param rating Current rating value (0 if unrated, 1 to 5 when selected).
+ * @param onRatingChange Lambda triggered when a coffee cup is tapped.
  */
 @Composable
 fun RatingView(
@@ -30,7 +38,7 @@ fun RatingView(
         for (i in 1..5) {
             Icon(
                 imageVector = if (i <= rating) Icons.Filled.Coffee else Icons.Outlined.Coffee,
-                contentDescription = "Rate $i stars",
+                contentDescription = "Rate $i coffee cups",
                 tint = if (i <= rating) CoffeeBrown else Color.Gray,
                 modifier = Modifier.clickable { onRatingChange(i) }
             )

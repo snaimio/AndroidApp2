@@ -23,7 +23,20 @@ import com.sheikhnaim.androidapp2.data.OrderViewModel
 import com.sheikhnaim.androidapp2.ui.theme.CoffeeBrown
 
 /**
- * Screen displaying the chronological order history grouped by day.
+ * ============================================================================
+ * SCREEN: HistoryScreen
+ * ============================================================================
+ * Equivalent to SwiftUI's `HistoryView`.
+ *
+ * Displays:
+ *  1. TopAppBar with title "Order History" and a "Close" button.
+ *  2. Empty state with clock icon if no orders placed yet.
+ *  3. Sectioned LazyColumn grouped by calendar day (e.g. "Monday, Aug 19").
+ *  4. Individual order cards displaying member name, rating coffee cups,
+ *     drink name, cup size, sugar, and milk shots.
+ *
+ * @param viewModel Shared OrderViewModel holding the StateFlow of orderDays.
+ * @param onDismiss Callback to dismiss the bottom sheet.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -31,6 +44,7 @@ fun HistoryScreen(
     viewModel: OrderViewModel,
     onDismiss: () -> Unit
 ) {
+    // Collect reactive state from StateFlow in Compose lifecycle
     val orderDays by viewModel.orderDays.collectAsState()
 
     Scaffold(
@@ -56,7 +70,7 @@ fun HistoryScreen(
                 .padding(innerPadding)
         ) {
             if (orderDays.isEmpty()) {
-                // Empty state matching iOS
+                // Empty state matching iOS HistoryView
                 Column(
                     modifier = Modifier.fillMaxSize(),
                     verticalArrangement = Arrangement.Center,
@@ -83,12 +97,14 @@ fun HistoryScreen(
                     )
                 }
             } else {
+                // LazyColumn with Section Headers for each Day
                 LazyColumn(
                     modifier = Modifier.fillMaxSize(),
                     contentPadding = PaddingValues(16.dp),
                     verticalArrangement = Arrangement.spacedBy(16.dp)
                 ) {
                     orderDays.forEach { day ->
+                        // Day section header (e.g. "Monday, Aug 19")
                         item {
                             Text(
                                 text = day.dateFormatted,
@@ -99,6 +115,7 @@ fun HistoryScreen(
                             )
                         }
 
+                        // Order cards placed on this date
                         items(day.orders, key = { it.id }) { order ->
                             Card(
                                 modifier = Modifier.fillMaxWidth(),
@@ -120,7 +137,7 @@ fun HistoryScreen(
                                             color = CoffeeBrown
                                         )
                                         Spacer(modifier = Modifier.weight(1f))
-                                        // Rating cups in history
+                                        // Rating cups in history (filled vs outlined)
                                         Row(horizontalArrangement = Arrangement.spacedBy(2.dp)) {
                                             for (i in 1..5) {
                                                 Icon(

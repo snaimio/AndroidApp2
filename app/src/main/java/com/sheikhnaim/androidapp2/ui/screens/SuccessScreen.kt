@@ -19,7 +19,19 @@ import com.sheikhnaim.androidapp2.ui.theme.CoffeeBrown
 import com.sheikhnaim.androidapp2.ui.theme.SparkleYellow
 
 /**
- * Celebratory completion screen shown when all team members complete their orders.
+ * ============================================================================
+ * SCREEN: SuccessScreen
+ * ============================================================================
+ * Equivalent to SwiftUI's `SuccessView`.
+ *
+ * Appears after Casey (the final team member) finishes ordering.
+ * Features:
+ *  - Celebratory coffee cup surrounded by 3 offset yellow sparkles.
+ *  - "All Orders Complete!" headline.
+ *  - Motivational team success message.
+ *  - "Back to Welcome" button returning the app back to Tab 0.
+ *
+ * @param onBackToWelcome Callback returning to the Welcome screen.
  */
 @Composable
 fun SuccessScreen(
@@ -36,11 +48,12 @@ fun SuccessScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center
         ) {
-            // Coffee cup with sparkles around it matching iOS SuccessView
+            // Coffee cup with celebratory sparkles around it matching iOS SuccessView
             Box(
                 contentAlignment = Alignment.Center,
                 modifier = Modifier.size(140.dp)
             ) {
+                // Main Coffee Cup
                 Icon(
                     imageVector = Icons.Filled.Coffee,
                     contentDescription = "Success Coffee Cup",

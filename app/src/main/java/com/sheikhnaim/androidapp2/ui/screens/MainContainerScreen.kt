@@ -15,8 +15,21 @@ import com.sheikhnaim.androidapp2.data.OrderViewModel
 import kotlinx.coroutines.launch
 
 /**
- * Main application container managing full-screen horizontal paging between
- * the Welcome screen and each team member's order screen.
+ * ============================================================================
+ * ROOT CONTAINER: MainContainerScreen
+ * ============================================================================
+ * Equivalent to SwiftUI's `ContentView` with `TabView(selection: ...).tabViewStyle(PageTabViewStyle(...))`.
+ *
+ * Features:
+ *  1. `HorizontalPager`: Full-screen swipeable pager managing 5 total tabs:
+ *      - Tab 0: `WelcomeScreen`
+ *      - Tab 1: Alex's `OrderScreen`
+ *      - Tab 2: Jordan's `OrderScreen`
+ *      - Tab 3: Taylor's `OrderScreen`
+ *      - Tab 4: Casey's `OrderScreen`
+ *  2. `ModalBottomSheet`: Order History modal (equivalent to `.sheet(isPresented: $showHistory)`).
+ *  3. `Dialog`: Fullscreen Success celebration modal (equivalent to `.sheet(isPresented: $showSuccess)`).
+ *  4. Safe Insets: `systemBarsPadding()` ensures edge-to-edge content is never clipped by system bars.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -46,7 +59,7 @@ fun MainContainerScreen(
                 onHistoryClick = { showHistorySheet = true }
             )
         } else {
-            // Tabs 1..4: Team Member Order Screens
+            // Tabs 1..4: Team Member Order Screens (Alex, Jordan, Taylor, Casey)
             val memberIndex = page - 1
             val isLastMember = memberIndex == viewModel.teamMembers.size - 1
 
@@ -63,8 +76,10 @@ fun MainContainerScreen(
                 onHistoryClick = { showHistorySheet = true },
                 onOrderFinished = {
                     if (isLastMember) {
+                        // Casey completed order -> show celebratory success modal
                         showSuccessDialog = true
                     } else {
+                        // Advance to next team member's order tab
                         coroutineScope.launch { pagerState.animateScrollToPage(page + 1) }
                     }
                 }
@@ -72,7 +87,7 @@ fun MainContainerScreen(
         }
     }
 
-    // Modal Bottom Sheet for History
+    // Modal Bottom Sheet for Order History
     if (showHistorySheet) {
         ModalBottomSheet(
             onDismissRequest = { showHistorySheet = false },
@@ -94,6 +109,7 @@ fun MainContainerScreen(
             SuccessScreen(
                 onBackToWelcome = {
                     showSuccessDialog = false
+                    // Reset pager back to Welcome screen (Tab 0)
                     coroutineScope.launch { pagerState.scrollToPage(0) }
                 }
             )

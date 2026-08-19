@@ -30,8 +30,21 @@ import com.sheikhnaim.androidapp2.ui.theme.*
 import kotlin.math.roundToInt
 
 /**
- * Individual member ordering screen containing drink options, customization selectors,
- * animated countdown timer, rating bar, and submission logic.
+ * ============================================================================
+ * SCREEN: OrderScreen
+ * ============================================================================
+ * Equivalent to SwiftUI's `OrderView` (Tabs 1, 2, 3, 4).
+ *
+ * Core Features:
+ *  1. Header with direct page jumping.
+ *  2. Drink list with dynamic pricing and checkmarks.
+ *  3. Size selector (S, M, L, XL) applying dynamic price multipliers.
+ *  4. Sugar (0-4) and Milk (0-4) pill selection buttons.
+ *  5. Order workflow:
+ *     - [Place Order] -> 3-second animated prep timer (`TimerView`)
+ *     - [Order Ready!] -> [Rate Your Drink]
+ *     - [RatingView (1-5)] -> [Next] button (saves order to ViewModel and advances page).
+ *  6. Bottom quick-actions: [Home] and [History].
  */
 @Composable
 fun OrderScreen(
@@ -48,20 +61,21 @@ fun OrderScreen(
     // Form selection states
     var selectedDrinkIndex by remember { mutableIntStateOf(0) }
     var selectedSize by remember { mutableIntStateOf(1) } // Default Medium (index 1)
-    var selectedSugar by remember { mutableIntStateOf(2) } // Default 2
-    var selectedMilk by remember { mutableIntStateOf(2) } // Default 2
+    var selectedSugar by remember { mutableIntStateOf(2) } // Default 2 sugars
+    var selectedMilk by remember { mutableIntStateOf(2) }  // Default 2 milk
     var rating by remember { mutableIntStateOf(0) }
 
-    // Multi-step preparation flow states
+    // Multi-step preparation & rating flow states
     var showTimer by remember { mutableStateOf(false) }
     var timerDone by remember { mutableStateOf(false) }
     var showRating by remember { mutableStateOf(false) }
 
-    // Dynamic price calculation with rounding
+    // Dynamic price formula matching iOS: (BasePrice * Multiplier) rounded to 2 decimals
     val basePrice = viewModel.drinkMenu[selectedDrinkIndex].second
     val multiplier = viewModel.sizeMultipliers[selectedSize]
     val totalPrice = ((basePrice * multiplier) * 100).roundToInt() / 100.0
 
+    // Reset local state when transitioning to next person
     fun resetOrder() {
         showTimer = false
         timerDone = false
@@ -76,6 +90,7 @@ fun OrderScreen(
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        // Navigation Header with Numbered Circles
         HeaderView(
             titleText = "$teamName's Order",
             currentPage = currentPage,
@@ -96,7 +111,7 @@ fun OrderScreen(
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        // Drink Selection List
+        // Drink Selection List Header
         Text(
             text = "Select Drink",
             fontSize = 16.sp,
@@ -104,6 +119,7 @@ fun OrderScreen(
             color = Color.Gray
         )
 
+        // Radio-style drink options list
         Column(
             modifier = Modifier
                 .fillMaxWidth()
@@ -199,7 +215,7 @@ fun OrderScreen(
                 }
             }
 
-            // Milk selector (0..4) in blue
+            // Milk selector (0..4) in distinct Blue
             Row(verticalAlignment = Alignment.CenterVertically) {
                 Text(text = "Milk", fontSize = 14.sp, color = Color.Gray, modifier = Modifier.width(55.dp))
                 Row(horizontalArrangement = Arrangement.spacedBy(6.dp)) {
@@ -227,7 +243,7 @@ fun OrderScreen(
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        // Total Price Display
+        // Dynamic Total Price Display
         Text(
             text = String.format("Total: $%.2f", totalPrice),
             fontSize = 18.sp,
@@ -237,9 +253,10 @@ fun OrderScreen(
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        // Order Flow: Place Order -> Timer -> Ready & Rate -> Next
+        // Order Flow: [Place Order] -> [Timer] -> [Ready & Rate] -> [Next]
         if (showTimer) {
             if (!timerDone) {
+                // Step 1: Preparation Timer
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.height(90.dp)
@@ -248,6 +265,7 @@ fun OrderScreen(
                     TimerView(onTimerDone = { timerDone = true })
                 }
             } else if (!showRating) {
+                // Step 2: Order Ready Confirmation -> Button to trigger rating
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.height(110.dp)
@@ -270,6 +288,7 @@ fun OrderScreen(
                     }
                 }
             } else {
+                // Step 3: Interactive 5-cup Rating bar and Next button
                 Column(
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier.height(140.dp)
@@ -280,6 +299,7 @@ fun OrderScreen(
                     Spacer(modifier = Modifier.height(12.dp))
                     Button(
                         onClick = {
+                            // Record order in shared ViewModel
                             viewModel.addOrder(
                                 CoffeeOrderItem(
                                     teamMemberName = teamName,
@@ -302,6 +322,7 @@ fun OrderScreen(
                 }
             }
         } else {
+            // Initial State: Big "Place Order" button
             Button(
                 onClick = { showTimer = true },
                 colors = ButtonDefaults.buttonColors(containerColor = CoffeeBrown),
@@ -316,7 +337,7 @@ fun OrderScreen(
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        // Home and History Quick Actions
+        // Home and History Quick Actions at bottom of screen
         Row(
             horizontalArrangement = Arrangement.spacedBy(24.dp)
         ) {

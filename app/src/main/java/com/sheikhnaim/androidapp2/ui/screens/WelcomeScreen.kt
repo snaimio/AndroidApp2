@@ -19,7 +19,20 @@ import com.sheikhnaim.androidapp2.ui.components.HeaderView
 import com.sheikhnaim.androidapp2.ui.theme.CoffeeBrown
 
 /**
- * Welcome screen presenting app brand, start button, and quick access to Order History.
+ * ============================================================================
+ * SCREEN: WelcomeScreen
+ * ============================================================================
+ * Equivalent to SwiftUI's `WelcomeView` (Tab 0).
+ *
+ * Features:
+ *  - Header with title "Welcome" (no circle indicators).
+ *  - Large coffee cup branding icon.
+ *  - "Team Coffee Run" title & tagline.
+ *  - "Get Started" button to navigate to Alex's order page (Page 1).
+ *  - "Order History" button to open the history modal bottom sheet.
+ *
+ * @param onGetStartedClick Callback to animate pager to page 1.
+ * @param onHistoryClick Callback to open the order history bottom sheet.
  */
 @Composable
 fun WelcomeScreen(
@@ -32,6 +45,7 @@ fun WelcomeScreen(
             .background(Color.White),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
+        // Header without page numbers
         HeaderView(
             titleText = "Welcome",
             currentPage = 0,
@@ -41,7 +55,7 @@ fun WelcomeScreen(
 
         Spacer(modifier = Modifier.weight(1f))
 
-        // Large Coffee Cup Icon
+        // Large Coffee Cup Icon Branding
         Icon(
             imageVector = Icons.Filled.Coffee,
             contentDescription = "Coffee Logo",
@@ -67,7 +81,7 @@ fun WelcomeScreen(
 
         Spacer(modifier = Modifier.weight(1.5f))
 
-        // "Get Started" Button
+        // "Get Started" Button -> Takes user to Alex's order screen (Page 1)
         Button(
             onClick = onGetStartedClick,
             shape = RoundedCornerShape(25.dp),
@@ -84,7 +98,7 @@ fun WelcomeScreen(
 
         Spacer(modifier = Modifier.height(16.dp))
 
-        // "Order History" Button
+        // "Order History" Button -> Opens the bottom sheet history dialog
         TextButton(onClick = onHistoryClick) {
             Icon(
                 imageVector = Icons.Filled.Schedule,
